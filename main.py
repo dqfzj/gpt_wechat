@@ -19,7 +19,6 @@ app = Flask(__name__)
 
 @app.route('/wechat/gpt', methods=['GET'])
 def get_handle():
-    import pdb; pdb.set_trace()
     handle = Handle()
     return handle.execute()
 
