@@ -38,9 +38,10 @@ class Logger:
         file_handler = TimedRotatingFileHandler(log_path, when='d', interval=1, backupCount=30)
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(fmt)
-        if get_os() == "windows":
-            self.logger.addHandler(stdout_handler)
-        self.logger.addHandler(file_handler)
+        if not self.logger.handlers:
+            if get_os() == "windows":
+                self.logger.addHandler(stdout_handler)
+            self.logger.addHandler(file_handler)
 
     def debug(self, msg):
         self.logger.debug(msg)
