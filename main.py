@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+# coding=utf-8
 from flask import Flask
 
 
@@ -13,4 +15,5 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(port=9000)
+    # app.run(host='112.10.236.251', port=9000, debug=True)
+    app.run(host='192.168.16.167', port=9000, debug=True)
