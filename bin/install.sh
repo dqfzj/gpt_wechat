@@ -1,0 +1,1 @@
+echo "*/1 * * * * sh /opt/wechat/gongzhonghao/gpt_wechat/bin/check.sh" >> /etc/crontab

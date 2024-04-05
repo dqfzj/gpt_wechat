@@ -6,7 +6,11 @@
 # Created:          2024/4/5 9:53
 # Description:
 # ------------------------------------------------------------------
+import os
+import sys
 from flask import Flask, render_template
+
+sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from webService.Handle import Handle
 
