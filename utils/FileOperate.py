@@ -7,6 +7,7 @@
 # Description:      
 # ------------------------------------------------------------------
 import configparser
+import os
 import platform
 
 
@@ -17,8 +18,11 @@ def get_os():
     return platform.system().lower()
 
 
-def get_conf(setion, key):
+def get_conf(section, key):
     cf = configparser.ConfigParser()
-    cf.read("../conf/server.conf", encoding='utf-8')
-    return cf.get(setion, key)
+    conf_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../conf/server.conf"))
+    cf.read(conf_path, encoding='utf-8')
+
+    sections = cf.sections()
+    return cf.get(section, key)
 

@@ -10,6 +10,8 @@ import os
 import sys
 from flask import Flask, render_template
 
+from utils.FileOperate import get_conf
+
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 from webService.Handle import Handle
@@ -29,4 +31,5 @@ def test_console():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=9000)
+    debug = get_conf("system", "debug") == "1"
+    app.run(host='127.0.0.1', port=9000, debug=debug)
