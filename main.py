@@ -22,7 +22,13 @@ app = Flask(__name__)
 @app.route('/wechat/gpt', methods=['GET'])
 def get_handle():
     handle = Handle()
-    return handle.execute()
+    return handle.get_handle()
+
+
+@app.route('/wechat/gpt', methods=['POST'])
+def wechat_reply():
+    handle = Handle()
+    return handle.post()
 
 
 @app.route('/wechat/console_test', methods=['GET'])

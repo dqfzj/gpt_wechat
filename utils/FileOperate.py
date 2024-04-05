@@ -23,6 +23,4 @@ def get_conf(section, key):
     conf_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../conf/server.conf"))
     cf.read(conf_path, encoding='utf-8')
 
-    sections = cf.sections()
     return cf.get(section, key)
-
