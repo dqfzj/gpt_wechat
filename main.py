@@ -13,14 +13,13 @@ from webService.Handle import Handle
 app = Flask(__name__)
 
 
-@app.route('/wechat', methods=['GET'])
+@app.route('/wechat/gpt', methods=['GET'])
 def get_handle():
     handle = Handle()
     return handle.execute()
 
 
-@app.route('/', methods=['GET'])
-@app.route('/test', methods=['GET'])
+@app.route('/wechat/console_test', methods=['GET'])
 def test_console():
     return render_template("index.html")
 
