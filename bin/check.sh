@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 path=/var/log/gpt_wechat/
 
 process=`ps aux | grep main.py | grep -v grep`;
