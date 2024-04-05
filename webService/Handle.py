@@ -38,5 +38,6 @@ class Handle:
                 return echostr
             else:
                 return ""
-        except Exception as Argument:
-            return str(Argument)
+        except Exception as e:
+            self.logger.error(f"handle failed with exception:{str(e)}")
+            return str(e)
