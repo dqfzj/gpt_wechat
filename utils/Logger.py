@@ -9,6 +9,7 @@
 import os
 import sys
 import logging
+from logging.handlers import TimedRotatingFileHandler
 
 from utils.FileOperate import get_conf, get_os
 
@@ -33,8 +34,8 @@ class Logger:
         stdout_handler.setLevel(logging.DEBUG)
         stdout_handler.setFormatter(fmt)
 
-        # Create handlers for logging to the standard output and a file
-        file_handler = logging.FileHandler(log_path)
+        # 每 1(interval) 天(when) 重写1个文件,保留7(backupCount) 个旧文件；when还可以是Y/m/H/M/S
+        file_handler = TimedRotatingFileHandler(log_path, when='d', interval=1, backupCount=30)
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(fmt)
         if get_os() == "windows":
