@@ -6,18 +6,23 @@
 # Created:          2024/4/5 9:53
 # Description:
 # ------------------------------------------------------------------
-from flask import Flask
+from flask import Flask, render_template
 
+from webService.Handle import Handle
 
 app = Flask(__name__)
 
 
-@app.route('/wechat')
-def index():
-    return {
-        "msg": "success",
-        "data": "welcome."
-    }
+@app.route('/wechat', methods=['GET'])
+def get_handle():
+    handle = Handle()
+    return handle.execute()
+
+
+@app.route('/', methods=['GET'])
+@app.route('/test', methods=['GET'])
+def test_console():
+    return render_template("index.html")
 
 
 if __name__ == '__main__':
