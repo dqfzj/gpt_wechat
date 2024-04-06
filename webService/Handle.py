@@ -56,7 +56,7 @@ class Handle:
             if isinstance(req_msg, Msg) and req_msg.MsgType == 'text':
                 toUser = req_msg.FromUserName
                 fromUser = req_msg.ToUserName
-                content = f"收到了消息：{req_msg.input_content}，当前时间为{time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))}"
+                content = f"我收到了消息：{req_msg.input_content.decode('UTF-8','strict')}，我回复你的当前时间为{time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))}"
                 self.logger.info(f"get request, ready to send content:{content}")
                 return req_msg.send(content)
             else:
