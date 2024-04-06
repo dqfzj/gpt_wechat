@@ -26,6 +26,9 @@ class TextMsg(Msg):
         Msg.__init__(self, xml_data)
         self.input_content = xml_data.find('Content').text.encode("utf-8")
 
+    def __str__(self):
+        return str(self.input_content)
+
     def send(self, content=None):
         xml_form = f"""
             <xml>

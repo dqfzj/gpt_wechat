@@ -7,6 +7,8 @@
 # Description:
 # ------------------------------------------------------------------
 import hashlib
+import time
+
 from flask import request
 
 from utils.Logger import Logger
@@ -47,14 +49,14 @@ class Handle:
     def post(self):
         try:
             req_data = request.data
-            self.logger.info(f"get request data is:{req_data}")
+            self.logger.info(f"get request data is:{str(req_data)}")
 
             req_msg = receive.parse_xml(req_data)
             self.logger.info(f"get request, msg is {req_msg},type is {type(req_msg)}")
             if isinstance(req_msg, Msg) and req_msg.MsgType == 'text':
                 toUser = req_msg.FromUserName
                 fromUser = req_msg.ToUserName
-                content = "test"
+                content = f"收到了消息：{req_msg.input_content}，当前时间为{time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))}"
                 self.logger.info(f"get request, ready to send content:{content}")
                 return req_msg.send(content)
             else:

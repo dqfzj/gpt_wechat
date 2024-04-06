@@ -39,8 +39,8 @@ class Logger:
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(fmt)
         if not self.logger.handlers:
-            if get_os() == "windows":
-                self.logger.addHandler(stdout_handler)
+            # if get_os() == "windows":
+            self.logger.addHandler(stdout_handler)
             self.logger.addHandler(file_handler)
 
     def debug(self, msg):

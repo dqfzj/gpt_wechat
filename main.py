@@ -10,11 +10,11 @@ import os
 import sys
 from flask import Flask, render_template
 
-from utils.FileOperate import get_conf
-
 sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
+from utils.FileOperate import get_conf
 from webService.Handle import Handle
+
 
 app = Flask(__name__)
 

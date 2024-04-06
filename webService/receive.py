@@ -8,6 +8,7 @@
 # ------------------------------------------------------------------
 # -*- coding: utf-8 -*-#
 # filename: receive.py
+import json
 import xml.etree.ElementTree as ET
 
 from webService.Msg import TextMsg, ImageMsg
@@ -23,3 +24,14 @@ def parse_xml(web_data):
     elif msg_type == 'image':
         return ImageMsg(xml_data)
 
+
+def parse_json(web_data):
+    """解析json"""
+    if len(web_data) == 0:
+        return None
+    data = json.loads(web_data)
+    msg_type = data.get('MsgType')
+    if msg_type == 'text':
+        return TextMsg(data)
+    elif msg_type == 'image':
+        return ImageMsg(data)
