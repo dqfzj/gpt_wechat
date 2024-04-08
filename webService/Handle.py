@@ -7,18 +7,18 @@
 # Description:
 # ------------------------------------------------------------------
 import hashlib
-import time
 
 from flask import request
 
 from utils.Logger import Logger
 from webService import receive
+from webService.ChatGPT import ChatGpt
 from webService.Msg import Msg
 
 
 class Handle:
     def __init__(self):
-        self.logger = Logger()
+        self.logger = Logger().get_logger()
 
     def get_handle(self):
         try:
@@ -49,6 +49,8 @@ class Handle:
     def post(self):
         try:
             req_data = request.data
+
+            gpt = ChatGpt()
             self.logger.info(f"get request data is:{str(req_data)}")
 
             req_msg = receive.parse_xml(req_data)
@@ -56,7 +58,9 @@ class Handle:
             if isinstance(req_msg, Msg) and req_msg.MsgType == 'text':
                 toUser = req_msg.FromUserName
                 fromUser = req_msg.ToUserName
-                content = f"我收到了消息：{req_msg.input_content.decode('UTF-8','strict')}，我回复你的当前时间为{time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))}"
+                input_msg = req_msg.input_content.decode('UTF-8', 'strict')
+                content = gpt.ask(input_msg)
+                # content = f"我收到了消息：{req_msg.input_content.decode('UTF-8','strict')}，我回复你的当前时间为{time.strftime('%Y-%m-%d %H:%M:%S',time.localtime(time.time()))}"
                 self.logger.info(f"get request, ready to send content:{content}")
                 return req_msg.send(content)
             else:

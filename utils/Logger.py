@@ -35,22 +35,13 @@ class Logger:
         stdout_handler.setFormatter(fmt)
 
         # 每 1(interval) 天(when) 重写1个文件,保留7(backupCount) 个旧文件；when还可以是Y/m/H/M/S
-        file_handler = TimedRotatingFileHandler(log_path, when='d', interval=1, backupCount=30)
+        file_handler = TimedRotatingFileHandler(log_path, encoding="utf-8", when='d', interval=1, backupCount=30)
         file_handler.setLevel(logging.INFO)
         file_handler.setFormatter(fmt)
         if not self.logger.handlers:
-            # if get_os() == "windows":
-            self.logger.addHandler(stdout_handler)
+            if get_os() == "windows":
+                self.logger.addHandler(stdout_handler)
             self.logger.addHandler(file_handler)
 
-    def debug(self, msg):
-        self.logger.debug(msg)
-
-    def info(self, msg):
-        self.logger.info(msg)
-
-    def warning(self, msg):
-        self.logger.warning(msg)
-
-    def error(self, msg):
-        self.logger.error(msg)
+    def get_logger(self):
+        return self.logger

@@ -6,8 +6,7 @@
 # Created:          2024/4/5 23:21
 # Description:      
 # ------------------------------------------------------------------
-# -*- coding: utf-8 -*-#
-# filename: receive.py
+
 import json
 import xml.etree.ElementTree as ET
 

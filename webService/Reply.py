@@ -7,10 +7,8 @@
 # Description:      
 # ------------------------------------------------------------------
 
-
-# -*- coding: utf-8 -*-#
-# filename: reply.py
 import time
+
 
 class Msg(object):
     def __init__(self):
@@ -19,8 +17,10 @@ class Msg(object):
     def send(self):
         return "success"
 
+
 class TextMsg(Msg):
     def __init__(self, toUserName, fromUserName, content):
+        super().__init__()
         self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
@@ -39,8 +39,10 @@ class TextMsg(Msg):
             """
         return XmlForm.format(**self.__dict)
 
+
 class ImageMsg(Msg):
     def __init__(self, toUserName, fromUserName, mediaId):
+        super().__init__()
         self.__dict = dict()
         self.__dict['ToUserName'] = toUserName
         self.__dict['FromUserName'] = fromUserName
