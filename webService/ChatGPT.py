@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# coding=utf-8
+# ------------------------------------------------------------------
+# File Name:        ChatGPT.py
+# Author:           dqfzj@foxmail.com
+# Created:          2024/4/8 9:53
+# Description:
+# ------------------------------------------------------------------
 import openai
 
 from utils.Logger import Logger
@@ -46,8 +54,6 @@ class ChatGpt:
     def ask_for_stram(self, content):
         resp_content = ""
         try:
-            # 这边还有一个 openai.Completion.create需要看差异
-            # chat = openai.ClientSession
             stream = self.client.chat.completions.create(
                 model=self.model,
                 messages=[{
