@@ -7,7 +7,6 @@
 # Description:
 # ------------------------------------------------------------------
 import hashlib
-import os.path
 import time
 
 from flask import request

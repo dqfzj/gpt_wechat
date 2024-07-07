@@ -37,6 +37,7 @@ class ChatGpt:
                 messages.append(msg.tran2msg())
         completion = None
         try:
+            self.logger.info(f"start to ask, content is {messages}")
             completion = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages
