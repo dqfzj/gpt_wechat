@@ -7,7 +7,10 @@
 # Description:
 # ------------------------------------------------------------------
 import hashlib
+import os.path
 import time
+import sys
+sys.path.append(os.path.abspath("../"))
 
 from flask import request
 
