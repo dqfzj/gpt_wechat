@@ -36,6 +36,9 @@ def get_history_by_user(user):
 def add_history(user, content, msg_type):
     new_msg = HistoryCache(content, msg_type)
     old = get_history_by_user(user)
+    for his in old:
+        if his.equals(new_msg):
+            return
     old.append(new_msg)
     USER_HISTORY_CACHE.update(
         {user: old}
