@@ -35,12 +35,12 @@ class HistoryCache():
     def get_time(self):
         return self.time
 
-    def equals(self, cache):
-        if self.type != cache.get_type():
+    def equals(self, new_msg):
+        if self.type != new_msg.get_type():
             return False
-        if self.content != cache.get_content():
+        if self.content != new_msg.get_content():
             return False
-        if self.time + datetime.timedelta(minutes=15) > cache.get_time():
+        if self.time + datetime.timedelta(minutes=15) < new_msg.get_time():
             return False
 
         return True
