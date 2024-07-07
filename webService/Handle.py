@@ -98,7 +98,6 @@ class Handle:
                 if input_msg == "1":
                     content = Q_AND_A.get(LAST_QUESTION.get("self.req_msg.FromUserName"), None)
                 if not content:
-                    import pdb;pdb.set_trace()
                     add_history(self.req_msg.FromUserName, input_msg, INPUT_CONTENT)
                     content = gpt.ask(get_history_by_user(self.req_msg.FromUserName))
                     Q_AND_A.update({input_msg: content})
