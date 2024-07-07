@@ -38,4 +38,5 @@ def test_console():
 
 if __name__ == '__main__':
     debug = get_conf("system", "debug") == "1"
+
     app.run(host='127.0.0.1', port=9000, debug=debug)
