@@ -18,6 +18,7 @@ from webService.ChatGPT import ChatGpt
 from webService.HistoryCache import HistoryCache
 from webService.Msg import Msg
 
+
 Q_AND_A = {}
 LAST_QUESTION = {}
 USER_HISTORY_CACHE = {}
@@ -96,6 +97,9 @@ class Handle:
                 content = Q_AND_A.get(input_msg, None)
                 if input_msg == "/clear":
                     content = "clear cache now."
+                    Q_AND_A.clear()
+                    LAST_QUESTION.clear()
+                    USER_HISTORY_CACHE.clear()
                     self.logger.info(content)
                     return self.req_msg.send(content)
                 if input_msg == "1":
