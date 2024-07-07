@@ -13,7 +13,6 @@ from flask import request
 
 from utils.Logger import Logger
 from utils.Constant import *
-from utils.TimeOperate import timeout
 from webService import receive
 from webService.ChatGPT import ChatGpt
 from webService.HistoryCache import HistoryCache

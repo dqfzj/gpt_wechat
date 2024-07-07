@@ -1,1 +1,1 @@
-echo "*/1 * * * * root bash /opt/wechat/gongzhonghao/gpt_wechat/bin/check.sh >/dev/null 2>&1" >> /etc/crontab
+echo "*/1 * * * * root bash /opt/wechat/gongzhonghao/gpt_wechat/bin/check.sh status>/dev/null 2>&1" >> /etc/crontab
