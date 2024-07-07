@@ -12,14 +12,32 @@ import time
 from flask import request
 
 from utils.Logger import Logger
+from utils.Constant import *
 from utils.TimeOperate import timeout
 from webService import receive
 from webService.ChatGPT import ChatGpt
+from webService.HistoryCache import HistoryCache
 from webService.Msg import Msg
-
 
 Q_AND_A = {}
 LAST_QUESTION = {}
+USER_HISTORY_CACHE = {}
+
+
+def get_history_by_user(user):
+    his = USER_HISTORY_CACHE.get(user)
+    new_hist = his
+    if his:
+        for h in his:
+            if not h.tran2msg():
+                new_hist.remove(h)
+    return new_hist if new_hist else []
+
+
+def add_history(user, content, msg_type):
+    USER_HISTORY_CACHE.update(
+        {user: get_history_by_user(user).append(HistoryCache(content, msg_type))}
+    )
 
 
 class Handle:
@@ -78,8 +96,11 @@ class Handle:
                 if input_msg == "1":
                     content = Q_AND_A.get(LAST_QUESTION.get("self.req_msg.FromUserName"), None)
                 if not content:
-                    content = gpt.ask(input_msg)
+                    add_history(self.req_msg.FromUserName, input_msg, INPUT_CONTENT)
+                    content = gpt.ask(get_history_by_user(self.req_msg.FromUserName))
                     Q_AND_A.update({input_msg: content})
+                    add_history(self.req_msg.FromUserName, content, REPLY_CONTENT)
+
                 self.logger.info(f"get request, ready to send content:{content}")
                 return self.req_msg.send(content)
             else:

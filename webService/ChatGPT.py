@@ -8,7 +8,9 @@
 # ------------------------------------------------------------------
 import openai
 
+from utils.Constant import INPUT_CONTENT
 from utils.Logger import Logger
+from webService.Handle import add_history, get_history_by_user
 
 
 def decode_response(completion):
@@ -28,16 +30,16 @@ class ChatGpt:
 
         self.logger = Logger().get_logger()
 
-    def ask(self, content):
+    def ask(self, msg_list):
+        messages = []
+        for msg in msg_list:
+            if msg.tran2msg():
+                messages.append(msg.tran2msg())
         completion = None
         try:
             completion = self.client.chat.completions.create(
                 model=self.model,
-                messages=[{
-                    "role": self.role,
-                    "content": content
-                }]
-
+                messages=messages
             )
         except Exception as exception:
             self.logger.error(f"create completion failed with: {exception}")
@@ -77,6 +79,8 @@ if __name__ == '__main__':
     print("input your question:")
     while True:
         question = input("")
+        add_history("local_user", question, INPUT_CONTENT)
+        content = gpt.ask(get_history_by_user("local_user"))
         try:
             ans = gpt.ask(question)
             print(ans)
