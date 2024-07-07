@@ -34,8 +34,9 @@ def get_history_by_user(user):
 
 
 def add_history(user, content, msg_type):
+    hist = get_history_by_user(user).append(HistoryCache(content, msg_type))
     USER_HISTORY_CACHE.update(
-        {user: get_history_by_user(user).append(HistoryCache(content, msg_type))}
+        {user: hist}
     )
 
 
