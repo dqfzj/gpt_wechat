@@ -7,6 +7,7 @@ check_process() {
   if [[ "$process" == "" ]]
   then
       echo "gpt_wechat is not running"
+      start_process
       return 1
   else
     echo "gpt_wechat is running, pid is $process"
@@ -20,7 +21,7 @@ start_process() {
   then
       echo "start gpt_chat now"
       cd $gpt_path
-      nohup python3 main.py >/dev/null 2>&1
+      nohup python3 main.py >/dev/null 2>&1 &
       echo "start gpt_chat success"
   fi
 }
