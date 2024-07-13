@@ -20,7 +20,7 @@ start_process() {
   then
       echo "start gpt_chat now"
       cd $gpt_path
-      python3 main.py
+      python3 main.py&1
   fi
 }
 
