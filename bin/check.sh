@@ -1,25 +1,37 @@
 #!/bin/bash
 path=/var/log/gpt_wechat/
+gpt_path=/opt/wechat/gongzhonghao/gpt_wechat/
 
 check_process() {
-  process=`ps aux | grep main.py | grep -v grep`;
+  process=`ps aux | grep main.py | grep -v grep| awk '{print $2}'`;
   if [[ "$process" == "" ]]
   then
-      cd /opt/wechat/gongzhonghao/gpt_wechat/
-      python3 main.py
+      echo "gpt_wechat is not running"
+      return 1
+  else
+    echo "gpt_wechat is running, pid is $process"
+    return 0
   fi
 }
 
 start_process() {
-  check_process
+  process=`ps aux | grep main.py | grep -v grep| awk '{print $2}'`;
+  if [[ "$process" == "" ]]
+  then
+      echo "start gpt_chat now"
+      cd $gpt_path
+      python3 main.py
+  fi
 }
 
 stop_process() {
-  process=`ps aux | grep main.py | grep -v grep`;
+  process=`ps aux | grep main.py | grep -v grep | awk '{print $2}'`;
   if [[ "$process" == "" ]]
   then
-      cd /opt/wechat/gongzhonghao/gpt_wechat/
-      python3 main.py
+    echo "gpt_chat is not running, no need to stop."
+  else
+    kill -9 "$process"
+    echo "stop gpt_chat, pid:$process"
   fi
 }
 # 根据参数执行相应操作
