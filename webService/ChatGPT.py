@@ -8,9 +8,8 @@
 # ------------------------------------------------------------------
 import openai
 
-# from utils.Constant import INPUT_CONTENT
+from utils.Constant import MODEL, KEY, BASE_URL
 from utils.Logger import Logger
-# from webService.Handle import add_history, get_history_by_user
 
 
 def decode_response(completion):
@@ -20,12 +19,12 @@ def decode_response(completion):
 
 class ChatGpt:
     def __init__(self):
-        self.model = "gpt-3.5-turbo"
+        self.model = MODEL
         self.role = "user"
-        self.key = "sk-8Uqopeo5NWHQ2Uo0Ca5J9tSBOOjeaLa6kxHNlN9NqFPjgCwM"
+        self.key = KEY
         self.client = openai.OpenAI(
             api_key=self.key,
-            base_url="https://api.chatanywhere.tech/v1"
+            base_url=BASE_URL
         )
 
         self.logger = Logger().get_logger()
