@@ -20,7 +20,8 @@ start_process() {
   then
       echo "start gpt_chat now"
       cd $gpt_path
-      python3 main.py >/dev/null 2>&1
+      nohup python3 main.py >/dev/null 2>&1
+      echo "start gpt_chat success"
   fi
 }
 
@@ -31,7 +32,7 @@ stop_process() {
     echo "gpt_chat is not running, no need to stop."
   else
     kill -9 "$process"
-    echo "stop gpt_chat, pid:$process"
+    echo "stop gpt_chat success, pid:$process"
   fi
 }
 # 根据参数执行相应操作
